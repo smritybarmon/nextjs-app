@@ -1,8 +1,7 @@
-import Link from "next/link";
 import React from "react";
 
-const Servicespage = () => {
-  const services = [
+export default function ServicesDetaolsPage({ params }) {
+  const data = [
     {
       id: "001",
       service_name: "ProConsult",
@@ -93,28 +92,17 @@ const Servicespage = () => {
       image: "https://ibb.co.com/8VH4FYm",
     },
   ];
-
-  return (
-    <div className="container mx-auto px-4 py-12">
-      <h1 className="text-4xl font-bold text-center mb-10">Our Services</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {services.map((service, index) => (
-          <div
-            key={index}
-            className="bg-white shadow-lg rounded-lg p-6 hover:shadow-xl transition duration-300"
-          >
-            <h2 className="text-2xl text-emerald-950 font-semibold mb-4">
-              {service.service_name}
-            </h2>
-            <p className="text-gray-600">{service.description}</p>
-            <Link href={`/services/${service.id}`}>
-              <button className="btn bg-blue-500 p-2 rounded-2xl">Buy</button>
-            </Link>
-          </div>
-        ))}
+  const id = params.id;
+  const service = data.find((item) => item.id === id);
+  if (!service) {
+    return <p>Service not found</p>;
+  } else {
+    return (
+      <div>
+        <h1>ServicesDetaolsPage</h1>
+        <p>ID: {id}</p>
+        <p> category:{service.category}</p>
       </div>
-    </div>
-  );
-};
-
-export default Servicespage;
+    );
+  }
+}
